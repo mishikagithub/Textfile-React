@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 export default function navbar(props) {
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
     >
       <div className='container-fluid'>
-        <Link className='navbar-brand' to='/'>
+        <a className='navbar-brand' href='/'>
           {" "}
           {props.title}{" "}
-        </Link>
+        </a>
         <button
           className='navbar-toggler'
           type='button'
@@ -31,11 +31,36 @@ export default function navbar(props) {
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-a' href='/about'>
+              <a className='nav-Link' href='/about'>
                 {props.aboutText}
               </a>
             </li>
           </ul>
+          <div className='d-flex'>
+            <div
+              className='bg-primary rounded mx-2'
+              onClick={() => {
+                props.togglemode("primary");
+              }}
+              style={{ height: "30px", width: "30px", cursor: "pointer" }}
+            ></div>
+
+            <div
+              className='bg-success rounded mx-2'
+              onClick={() => {
+                props.togglemode("success");
+              }}
+              style={{ height: "30px", width: "30px", cursor: "pointer" }}
+            ></div>
+
+            <div
+              className='bg-warning rounded mx-2'
+              onClick={() => {
+                props.togglemode("warning");
+              }}
+              style={{ height: "30px", width: "30px", cursor: "pointer" }}
+            ></div>
+          </div>
           {/* {
             <form className='d-flex'>
             <input className='form-control me-2'
@@ -54,7 +79,9 @@ export default function navbar(props) {
           >
             <input
               className='form-check-input'
-              onClick={props.togglemode}
+              onClick={() => {
+                props.togglemode();
+              }}
               type='checkbox'
               id='flexSwitchCheckDefault'
             />
@@ -62,7 +89,7 @@ export default function navbar(props) {
               className='form-check-label'
               htmlFor='flexSwitchCheckDefault'
             >
-              Enable mode
+              Toggle mode
             </label>
           </div>
         </div>
