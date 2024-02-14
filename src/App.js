@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-undef */
 import "./App.css";
-// eslint-disable-next-line no-unused-vars
+
 import Navbar from "./components/navbar";
 import Textfrom from "./components/textform";
-// // eslint-disable-next-line no-unused-vars
+
 import React, { useState } from "react";
 // import Translator from "./components/translator";
 import About from "./components/about";
@@ -25,10 +25,32 @@ function App() {
     }, 3000);
   };
   // eslint-disable-next-line no-unused-vars
-  const togglemode = () => {
+  //to switch changing mode throug enable button
+
+  // const togglemode = () => {
+  //   if (mode === "light") {
+  //     setmode("dark");
+  //     document.body.style.backgroundColor = "rgb(21 30 67)";
+  //     showalert("dark mode has been enable", "success");
+  //   } else {
+  //     setmode("light");
+  //     document.body.style.backgroundColor = "white";
+  //     showalert("light mode has been enable", "success");
+  //   }
+  // };
+  const removebodyclasses = () => {
+    document.body.classList.remove("bg-primary");
+    document.body.classList.remove("bg-success");
+    document.body.classList.remove("bg-warning");
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const togglemode = (cls) => {
+    removebodyclasses();
+    document.body.classList.add("bg-" + cls);
     if (mode === "light") {
       setmode("dark");
-      document.body.style.backgroundColor = "#0e4e5b";
+      document.body.style.backgroundColor = "rgb(21 30 67)";
       showalert("dark mode has been enable", "success");
     } else {
       setmode("light");
@@ -38,15 +60,15 @@ function App() {
   };
   return (
     <>
-      {/* <Navbar title='Navbar'  /> */}
-      {/* <Navbar /> */}
+      {/* <Navbar title='Navbar'  /> 
+       <Navbar /> */}
       <Router>
         <Navbar title='TextFile' mode={mode} togglemode={togglemode} />
         <Alert alert={alert} />
         <div className='container my-3'>
           <Switch>
             <Route path='/about'>
-              <About />
+              <About mode={mode} />
             </Route>
             <Route path='/Home'>
               <Textfrom showalert={showalert} heading='Textbox' mode={mode} />
